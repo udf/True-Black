@@ -1,3 +1,5 @@
+
+
 actionBarActionModeDefault=-16777216
 actionBarActionModeDefaultIcon=-1513240
 actionBarActionModeDefaultSelector=2047809827
@@ -199,7 +201,7 @@ chats_menuItemIcon=-5723992
 chats_menuItemText=-5723992
 chats_menuPhone=-2828074
 chats_menuPhoneCats=-2828074
-chats_menuTopShadow=-15724528
+chats_menuTopShadow=-16777216
 chats_message=-6250336
 chats_muteIcon=-10790053
 chats_name=-2828330
@@ -231,9 +233,9 @@ inappPlayerBackground=-16777216
 inappPlayerClose=-10987432
 inappPlayerPerformer=-2829100
 inappPlayerTitle=-2829100
-key_chats_menuTopShadow=789516
-listSelector=-16777216
-listSelectorSDK21=301989887
+key_chats_menuTopShadow=0
+listSelector=-2130706433
+listSelectorSDK21=-2130706433
 player_actionBar=-14935012
 player_actionBarItems=-1
 player_actionBarSelector=-14407896
