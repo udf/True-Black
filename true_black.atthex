@@ -67,6 +67,7 @@ chat_inFileBackgroundSelected=#999999
 chat_inFileIcon=#393a3a
 chat_inFileInfoSelectedText=#999999
 chat_inFileInfoText=#999999
+chat_inFileNameText=#d4d7d6
 chat_inFileProgress=#969999
 chat_inFileProgressSelected=#999999
 chat_inFileSelectedIcon=#3a3a3a
