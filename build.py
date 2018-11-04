@@ -40,7 +40,7 @@ def do_thing(inpath, outpath):
                     raise RuntimeError('line {}: {}'.format(i, e))
             lines.append(line)
 
-    with open(outpath, 'w') as f:
+    with open(outpath, 'w', newline='\n') as f:
         f.write('\n'.join(lines))
 
 
