@@ -265,6 +265,7 @@ chat_outReplyMediaMessageText=#999999
 chat_outReplyMessageText=#999999
 chat_outReplyNameText=#519aba
 chat_outSentCheck=#ffffff
+chat_outSentCheckRead=#ffffff
 chat_outSentCheckSelected=#ffffff
 chat_outSentClock=#c5c5c5
 chat_outSentClockSelected=#c5c5c5
