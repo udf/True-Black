@@ -1,5 +1,6 @@
 # Based on https://gist.github.com/udf/20096926dafe94d53c27349fdee5f47a
 import re
+from collections import OrderedDict
 
 
 RE_LINE = re.compile(r'^(\w+)=(.+)$')
@@ -28,20 +29,22 @@ def hex_to_int(hex_str):
 
 
 def do_thing(inpath, outpath):
-    lines = []
+    colours = OrderedDict()
     with open(inpath) as f:
         for i, line in enumerate(f, 1):
             line = line.strip()
             match = RE_LINE.match(line)
-            if match:
-                try:
-                    line = f'{match.group(1)}={hex_to_int(match.group(2))}'
-                except Exception as e:
-                    raise RuntimeError('line {}: {}'.format(i, e))
-            lines.append(line)
+            if not match:
+                continue
+            try:
+                colours[match.group(1)] = hex_to_int(match.group(2))
+            except Exception as e:
+                raise RuntimeError('line {}: {}'.format(i, e))
 
     with open(outpath, 'w', newline='\n') as f:
-        f.write('\n'.join(lines))
+        f.write('\n'.join(
+            f'{k}={v}' for k, v in colours.items()
+        ))
 
 
 try:
