@@ -142,6 +142,11 @@ white_80 = rgba(204, 204, 204)
 white_90 = rgba(230, 230, 230)
 white = rgba(255, 255, 255)
 
+placeholder_red = rgba(255, 0, 0)
+placeholder_green = rgba(0, 255, 0)
+placeholder_cyan = rgba(0, 255, 255)
+placeholder_yellow = rgba(255, 255, 0)
+
 data = f'''
 actionBarActionModeDefault={black}
 actionBarActionModeDefaultIcon={white_90}
