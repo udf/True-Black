@@ -1,6 +1,6 @@
 import random
 import colorsys
-from collections import Counter
+from collections import Counter, defaultdict
 
 
 def to_signed_32bit(n):
@@ -26,6 +26,7 @@ def hex_to_tuple(hex_str):
 
 class rgba:
     colour_usage_counter = Counter()
+    colour_instances = defaultdict(set)
 
     def __init__(self, r, g=None, b=None, a=None):
         # convert hex to tuple
@@ -81,6 +82,7 @@ class rgba:
 
     def __str__(s):
         rgba.colour_usage_counter.update((s,))
+        rgba.colour_instances[s].add(id(s))
         int_val = int(s.as_argbhex(), 16)
         return f'{to_signed_32bit(int_val)}'
 
@@ -90,6 +92,11 @@ class rgba:
             if count > 1:
                 continue
             print(f'Warning: {repr(colour)} is only used {count} time!')
+
+        for colour, ids in rgba.colour_instances.items():
+            if len(ids) <= 1:
+                continue
+            print(f'Warning: {repr(colour)} is defined by {len(ids)} instances!')
 
 
 class placeholder:
