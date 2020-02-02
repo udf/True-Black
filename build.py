@@ -131,16 +131,16 @@ class placeholder:
 
 transparent = rgba(0, 0, 0, 0)
 black = rgba(0, 0, 0)
-black_10 = rgba(0.1, 0.1, 0.1)
-black_20 = rgba(0.2, 0.2, 0.2)
-black_30 = rgba(0.3, 0.3, 0.3)
-black_40 = rgba(0.4, 0.4, 0.4)
-gray = rgba(0.5, 0.5, 0.5)
+black_10 = rgba(26, 26, 26)
+black_20 = rgba(51, 51, 51)
+black_30 = rgba(76, 76, 76)
+black_40 = rgba(102, 102, 102)
+gray = rgba(128, 128, 128)
 white = rgba(255, 255, 255)
-white_90 = rgba(0.9, 0.9, 0.9)
-white_80 = rgba(0.8, 0.8, 0.8)
-white_70 = rgba(0.7, 0.7, 0.7)
-white_60 = rgba(0.6, 0.6, 0.6)
+white_90 = rgba(230, 230, 230)
+white_80 = rgba(204, 204, 204)
+white_70 = rgba(178, 178, 178)
+white_60 = rgba(153, 153, 153)
 
 data = f'''
 actionBarActionModeDefault={black}
