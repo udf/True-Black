@@ -111,6 +111,7 @@ class rgba:
 
         print(f'{num_warnings} warning(s)')
 
+
 class placeholder:
     def __str__(self):
         h = random.uniform(0, 1)
