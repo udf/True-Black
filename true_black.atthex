@@ -362,6 +362,7 @@ chats_muteIcon=#5b5b5b
 chats_name=#d4d7d6
 chats_nameArchived=#d4d7d6
 chats_nameIcon=#fcfffe
+chats_nameMessage_threeLines=#d4d7d6
 chats_nameMessage=#519aba
 chats_nameMessageArchived=#a0a0a0
 chats_pinnedIcon=#787878
