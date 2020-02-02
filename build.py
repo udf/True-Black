@@ -25,7 +25,7 @@ def hex_to_tuple(hex_str):
 
 
 class rgba:
-    usage_counter = Counter()
+    colour_usage_counter = Counter()
 
     def __init__(self, r, g=None, b=None, a=None):
         # convert hex to tuple
@@ -60,6 +60,9 @@ class rgba:
     def as_rgbahex(s):
         return ''.join(f'{c:02X}' for c in (s.a, s.r, s.g, s.b))
 
+    def as_tuple(s):
+        return (s.r, s.g, s.b, s.a)
+
     def dist(s, o):
         v = (s.r - o.r)**2
         v += (s.g - o.g)**2
@@ -67,12 +70,26 @@ class rgba:
         v += (s.a - o.a)**2
         return v ** 0.5
 
+    def __hash__(s):
+        return hash(s.as_tuple())
+
+    def __eq__(s, o):
+        return s.as_tuple() == o.as_tuple()
+
     def __repr__(s):
         return f'rgba({s.r}, {s.g}, {s.b}, {s.a})'
 
     def __str__(s):
+        rgba.colour_usage_counter.update((s,))
         int_val = int(s.as_argbhex(), 16)
         return f'{to_signed_32bit(int_val)}'
+
+    @staticmethod
+    def print_warnings():
+        for colour, count in rgba.colour_usage_counter.items():
+            if count > 1:
+                continue
+            print(f'Warning: {repr(colour)} is only used {count} time!')
 
 
 class placeholder:
@@ -666,3 +683,5 @@ windowBackgroundWhiteValueText={rgba(81, 154, 186, 255)}
 
 with open('true_black.attheme', 'w') as f:
     f.write(data)
+
+rgba.print_warnings()
