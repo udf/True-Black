@@ -58,7 +58,7 @@ class rgba:
         return ''.join(f'{c:02X}' for c in (s.a, s.r, s.g, s.b))
 
     def as_rgbahex(s):
-        return ''.join(f'{c:02X}' for c in (s.a, s.r, s.g, s.b))
+        return ''.join(f'{c:02X}' for c in (s.r, s.g, s.b, s.a))
 
     def as_tuple(s):
         return (s.r, s.g, s.b, s.a)
