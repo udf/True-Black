@@ -88,16 +88,20 @@ class rgba:
 
     @staticmethod
     def print_warnings():
+        num_warnings = 0
         for colour, count in rgba.colour_usage_counter.items():
-            if count > 1:
+            if count > 3:
                 continue
-            print(f'Warning: {repr(colour)} is only used {count} time!')
+            num_warnings += 1
+            print(f'Warning: {repr(colour)} is only used {count} time(s)!')
 
         for colour, ids in rgba.colour_instances.items():
             if len(ids) <= 1:
                 continue
+            num_warnings += 1
             print(f'Warning: {repr(colour)} is defined by {len(ids)} instances!')
 
+        print(f'{num_warnings} warning(s)')
 
 class placeholder:
     def __str__(self):
