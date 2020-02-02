@@ -136,11 +136,11 @@ black_20 = rgba(51, 51, 51)
 black_30 = rgba(76, 76, 76)
 black_40 = rgba(102, 102, 102)
 gray = rgba(128, 128, 128)
-white = rgba(255, 255, 255)
-white_90 = rgba(230, 230, 230)
-white_80 = rgba(204, 204, 204)
-white_70 = rgba(178, 178, 178)
 white_60 = rgba(153, 153, 153)
+white_70 = rgba(178, 178, 178)
+white_80 = rgba(204, 204, 204)
+white_90 = rgba(230, 230, 230)
+white = rgba(255, 255, 255)
 
 data = f'''
 actionBarActionModeDefault={black}
