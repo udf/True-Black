@@ -27,6 +27,7 @@ def hex_to_tuple(hex_str):
 class rgba:
     colour_usage_counter = Counter()
     colour_instances = defaultdict(set)
+    never_used = set()
 
     def __init__(self, r, g=None, b=None, a=None):
         # convert hex to tuple
@@ -54,6 +55,8 @@ class rgba:
         self.g = g
         self.b = b
         self.a = a
+
+        rgba.never_used.add(self)
 
     def as_argbhex(s):
         return ''.join(f'{c:02X}' for c in (s.a, s.r, s.g, s.b))
@@ -83,12 +86,17 @@ class rgba:
     def __str__(s):
         rgba.colour_usage_counter.update((s,))
         rgba.colour_instances[s].add(id(s))
+        rgba.never_used.discard(s)
         int_val = int(s.as_argbhex(), 16)
         return f'{to_signed_32bit(int_val)}'
 
     @staticmethod
     def print_warnings():
         num_warnings = 0
+        for colour in rgba.never_used:
+            num_warnings += 1
+            print(f'Warning: {repr(colour)} is never used!')
+
         for colour, count in rgba.colour_usage_counter.items():
             if count > 3:
                 continue
