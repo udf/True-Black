@@ -24,6 +24,14 @@ def hex_to_tuple(hex_str):
     return (r, g, b, a)
 
 
+def sorted_items(dict, key=None, reverse=False):
+    if key is None:
+        key = lambda k, v: v
+    keys = sorted(dict, key=lambda k: key(k, dict[k]), reverse=reverse)
+    for k in keys:
+        yield k, dict[k]
+
+
 class rgba:
     colour_usage_counter = Counter()
     colour_instances = defaultdict(set)
@@ -97,13 +105,13 @@ class rgba:
             num_warnings += 1
             print(f'Warning: {repr(colour)} is never used!')
 
-        for colour, count in rgba.colour_usage_counter.items():
+        for colour, count in sorted_items(rgba.colour_usage_counter):
             if count >= 3:
                 continue
             num_warnings += 1
             print(f'Warning: {repr(colour)} is only used {count} time(s)!')
 
-        for colour, ids in rgba.colour_instances.items():
+        for colour, ids in sorted_items(rgba.colour_instances, key=lambda k, v: len(v)):
             if len(ids) <= 1:
                 continue
             num_warnings += 1
