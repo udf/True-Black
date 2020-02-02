@@ -98,7 +98,7 @@ class rgba:
             print(f'Warning: {repr(colour)} is never used!')
 
         for colour, count in rgba.colour_usage_counter.items():
-            if count > 3:
+            if count >= 3:
                 continue
             num_warnings += 1
             print(f'Warning: {repr(colour)} is only used {count} time(s)!')
