@@ -424,6 +424,7 @@ chat_outReplyMessageText={white_60}
 chat_outReplyNameText={rgba(81, 154, 186)}
 chat_outSentCheck={white}
 chat_outSentCheckRead={white}
+chat_outSentCheckReadSelected={white}
 chat_outSentCheckSelected={white}
 chat_outSentClock={white_80}
 chat_outSentClockSelected={white_80}

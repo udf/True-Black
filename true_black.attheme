@@ -274,6 +274,7 @@ chat_outReplyMessageText=-6710887
 chat_outReplyNameText=-11429190
 chat_outSentCheck=-1
 chat_outSentCheckRead=-1
+chat_outSentCheckReadSelected=-1
 chat_outSentCheckSelected=-1
 chat_outSentClock=-3355444
 chat_outSentClockSelected=-3355444
