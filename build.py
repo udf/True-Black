@@ -515,6 +515,7 @@ chats_nameIcon={white}
 chats_nameMessage_threeLines={white_80}
 chats_nameMessage={rgba(81, 154, 186)}
 chats_nameMessageArchived={white_60}
+chats_onlineCircle={rgba(77, 166, 234, 255)}
 chats_pinnedIcon={black_40}
 chats_pinnedOverlay={black}
 chats_secretIcon={rgba(113, 215, 86)}
