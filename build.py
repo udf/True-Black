@@ -547,6 +547,7 @@ contextProgressInner3={white_70}
 contextProgressOuter1={rgba(25, 167, 232)}
 contextProgressOuter2={white}
 contextProgressOuter3={white}
+dialog_inlineProgressBackground={black_10}
 dialog_liveLocationProgress={rgba(55, 169, 240)}
 dialogBackground={black}
 dialogBackgroundGray={black}
