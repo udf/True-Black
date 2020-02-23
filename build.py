@@ -266,6 +266,7 @@ chat_emojiPanelStickerSetName={white_60}
 chat_emojiPanelStickerSetNameIcon={white_70}
 chat_emojiPanelTrendingDescription={black_40}
 chat_emojiPanelTrendingTitle={white_60}
+chat_emojiSearchBackground={black_10}
 chat_fieldOverlayText={rgba(58, 140, 207)}
 chat_gifSaveHintBackground={rgba(17, 17, 17, 204)}
 chat_gifSaveHintText={white}
