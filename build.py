@@ -473,6 +473,7 @@ chat_serviceBackgroundSelected={black_20}
 chat_serviceIcon={white}
 chat_serviceLink={white}
 chat_serviceText={white}
+chat_status={white}
 chat_stickerNameText={white}
 chat_stickerReplyLine={white}
 chat_stickerReplyMessageText={white}
