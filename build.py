@@ -47,7 +47,7 @@ class rgba:
     never_used = set()
     gen_debug = False
 
-    def __init__(self, r, g=None, b=None, a=None):
+    def __init__(self, r, g=None, b=None, a=None, has_parent=False):
         # convert hex to tuple
         if isinstance(r, str):
             r, g, b, a = hex_to_tuple(r)
@@ -73,8 +73,13 @@ class rgba:
         self.g = g
         self.b = b
         self.a = a
+        self.has_parent = has_parent
 
         rgba.never_used.add(self)
+
+    def with_alpha(s, a):
+        rgba.never_used.discard(s)
+        return rgba(s.r, s.g, s.b, a, has_parent=True)
 
     def as_argbhex(s):
         return ''.join(f'{c:02X}' for c in (s.a, s.r, s.g, s.b))
@@ -84,6 +89,9 @@ class rgba:
 
     def as_tuple(s):
         return (s.r, s.g, s.b, s.a)
+
+    def as_rgb_tuple(s):
+        return (s.r, s.g, s.b)
 
     def dist(s, o):
         v = (s.r - o.r)**2
@@ -104,9 +112,10 @@ class rgba:
     def __str__(s):
         if rgba.gen_debug:
             return str(to_signed_32bit(int(get_debug_colour(), 16)))
-        rgba.colour_usage_counter.update((s,))
-        rgba.colour_instances[s].add(id(s))
+        rgba.colour_usage_counter.update((s.as_rgb_tuple(),))
         rgba.never_used.discard(s)
+        if not s.has_parent:
+            rgba.colour_instances[s.as_rgb_tuple()].add(s)
         int_val = int(s.as_argbhex(), 16)
         return f'{to_signed_32bit(int_val)}'
 
@@ -127,7 +136,7 @@ class rgba:
             if len(ids) <= 1:
                 continue
             num_warnings += 1
-            print(f'Warning: {repr(colour)} is defined by {len(ids)} instances!')
+            print(f'Warning: {repr(colour)} is defined by {len(ids)} instances! {ids}')
 
         print(f'{num_warnings} warning(s)')
 
@@ -141,7 +150,6 @@ class placeholder:
         return str(rgba(*rgb))
 
 
-transparent = rgba(0, 0, 0, 0)
 black = rgba(0, 0, 0)
 black_10 = rgba(26, 26, 26)
 black_15 = rgba(38, 38, 38)
@@ -154,6 +162,8 @@ white_70 = rgba(178, 178, 178)
 white_80 = rgba(204, 204, 204)
 white_90 = rgba(230, 230, 230)
 white = rgba(255, 255, 255)
+
+transparent = black.with_alpha(0)
 
 placeholder_red = rgba(255, 0, 0)
 placeholder_green = rgba(0, 255, 0)
@@ -175,7 +185,7 @@ actionBarDefaultArchivedSelector={black_20}
 actionBarDefaultArchivedTitle={white}
 actionBarDefaultIcon={white}
 actionBarDefaultSearch={white}
-actionBarDefaultSearchPlaceholder={rgba(255, 255, 255, 128)}
+actionBarDefaultSearchPlaceholder={white.with_alpha(128)}
 actionBarDefaultSelector={black_40}
 actionBarDefaultSubmenuBackground={black_10}
 actionBarDefaultSubmenuItem={white_90}
@@ -186,7 +196,7 @@ actionBarTabActiveText={white}
 actionBarTabLine={white}
 actionBarTabSelector={white_60}
 actionBarTabUnactiveText={white_90}
-actionBarWhiteSelector={rgba(0, 0, 0, 47)}
+actionBarWhiteSelector={black.with_alpha(47)}
 avatar_actionBarIconBlue={white}
 avatar_actionBarIconCyan={white}
 avatar_actionBarIconGreen={white}
@@ -362,15 +372,15 @@ chat_linkSelectBackground={rgba(98, 169, 227, 51)}
 chat_lockIcon={white}
 chat_mediaBroadcast={white}
 chat_mediaInfoText={white}
-chat_mediaLoaderPhoto={rgba(0, 0, 0, 102)}
+chat_mediaLoaderPhoto={black.with_alpha(102)}
 chat_mediaLoaderPhotoIcon={white}
 chat_mediaLoaderPhotoIconSelected={white_80}
-chat_mediaLoaderPhotoSelected={rgba(0, 0, 0, 128)}
+chat_mediaLoaderPhotoSelected={black.with_alpha(128)}
 chat_mediaMenu={black}
 chat_mediaProgress={white}
 chat_mediaSentCheck={white}
 chat_mediaSentClock={white}
-chat_mediaTimeBackground={rgba(0, 0, 0, 102)}
+chat_mediaTimeBackground={black.with_alpha(102)}
 chat_mediaTimeText={white}
 chat_mediaViews={white}
 chat_messageLinkIn={rgba(86, 163, 219)}
@@ -378,7 +388,7 @@ chat_messageLinkOut={rgba(86, 163, 219)}
 chat_messagePanelBackground={black}
 chat_messagePanelCancelInlineBot={white_70}
 chat_messagePanelCursor={white_70}
-chat_messagePanelHint={rgba(153, 153, 153, 201)}
+chat_messagePanelHint={white_60.with_alpha(201)}
 chat_messagePanelIcons={black_40}
 chat_messagePanelSend={rgba(98, 176, 235)}
 chat_messagePanelShadow={black}
@@ -481,7 +491,7 @@ chat_reportSpam={rgba(229, 101, 85)}
 chat_searchPanelIcons={rgba(86, 163, 219)}
 chat_searchPanelText={rgba(78, 146, 204)}
 chat_secretChatStatusText={black_40}
-chat_secretTimerBackground={rgba(0, 0, 0, 182)}
+chat_secretTimerBackground={black.with_alpha(182)}
 chat_secretTimerText={white}
 chat_secretTimeText={white_80}
 chat_selectedBackground={black_15}
@@ -583,7 +593,7 @@ dialogBackgroundGray={black}
 dialogBadgeBackground={rgba(62, 193, 249)}
 dialogBadgeText={white}
 dialogButton={rgba(78, 146, 204)}
-dialogButtonSelector={rgba(255, 255, 255, 20)}
+dialogButtonSelector={white.with_alpha(20)}
 dialogCameraIcon={white}
 dialogCheckboxSquareBackground={rgba(77, 166, 234)}
 dialogCheckboxSquareCheck={white}
@@ -658,10 +668,10 @@ key_chat_messagePanelVoiceLockShadow={black}
 key_chats_menuTopShadow={transparent}
 key_graySectionText={white_80}
 key_player_progressCachedBackground={black_20}
-key_sheet_other={rgba(255, 255, 255, 67)}
+key_sheet_other={white.with_alpha(67)}
 key_sheet_scrollUp={white}
-listSelector={rgba(255, 255, 255, 64)}
-listSelectorSDK21={rgba(255, 255, 255, 64)}
+listSelector={white.with_alpha(64)}
+listSelectorSDK21={white.with_alpha(64)}
 location_liveLocationProgress={rgba(55, 169, 240)}
 location_placeLocationBackground={rgba(77, 166, 234)}
 location_sendLiveLocationBackground={rgba(255, 100, 100)}
@@ -718,8 +728,8 @@ statisticChartActivePickerChart={rgba(89, 104, 121, 216)}
 statisticChartBackZoomColor={rgba(70, 170, 238, 255)}
 statisticChartCheckboxInactive={rgba(155, 155, 155, 255)}
 statisticChartChevronColor={rgba(118, 124, 133, 255)}
-statisticChartHighlightColor={rgba(255, 255, 255, 134)}
-statisticChartHintLine={rgba(255, 255, 255, 26)}
+statisticChartHighlightColor={white.with_alpha(134)}
+statisticChartHintLine={white.with_alpha(26)}
 statisticChartInactivePickerChart={rgba(49, 58, 67, 216)}
 statisticChartLine_blue={rgba(82, 159, 255, 255)}
 statisticChartLine_golden={rgba(222, 172, 31, 255)}
@@ -731,9 +741,9 @@ statisticChartLine_orange={rgba(233, 196, 26, 255)}
 statisticChartLine_red={rgba(243, 76, 68, 255)}
 statisticChartRipple={rgba(164, 189, 210, 44)}
 statisticChartSignature={rgba(163, 177, 194, 183)}
-statisticChartSignatureAlpha={rgba(255, 255, 255, 139)}
+statisticChartSignatureAlpha={white.with_alpha(139)}
 stickers_menu={black_30}
-stickers_menuSelector={rgba(0, 0, 0, 47)}
+stickers_menuSelector={black.with_alpha(47)}
 switch2Track={rgba(255, 176, 173)}
 switch2TrackChecked={rgba(162, 206, 248)}
 switchThumb={white_70}
