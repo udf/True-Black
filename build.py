@@ -132,13 +132,13 @@ class rgba:
             if count >= 3:
                 continue
             num_warnings += 1
-            print(f'Warning: {repr(colour)} is only used {count} time(s)!')
+            print(f'Warning: rgba{repr(colour)} is only used {count} time(s)!')
 
         for colour, ids in sorted_items(rgba.colour_instances, key=lambda k, v: len(v)):
             if len(ids) <= 1:
                 continue
             num_warnings += 1
-            print(f'Warning: {repr(colour)} is defined by {len(ids)} instances!')
+            print(f'Warning: rgba{repr(colour)} is defined by {len(ids)} instances!')
 
         print(f'{num_warnings} warning(s)')
 
@@ -158,6 +158,7 @@ black_15 = rgba(38, 38, 38)
 black_20 = rgba(51, 51, 51)
 black_30 = rgba(76, 76, 76)
 black_40 = rgba(102, 102, 102)
+black_45 = rgba(115, 115, 115)
 gray = rgba(128, 128, 128)
 white_60 = rgba(153, 153, 153)
 white_70 = rgba(178, 178, 178)
@@ -295,7 +296,7 @@ chat_emojiPanelStickerSetNameIcon={white_70}
 chat_emojiPanelTrendingDescription={black_40}
 chat_emojiPanelTrendingTitle={white_60}
 chat_emojiSearchBackground={black_10}
-chat_emojiSearchIcon={rgba(115, 115, 116, 255)}
+chat_emojiSearchIcon={black_45}
 chat_fieldOverlayText={rgba(58, 140, 207)}
 chat_gifSaveHintBackground={rgba(17, 17, 17, 204)}
 chat_gifSaveHintText={white}
@@ -546,9 +547,9 @@ chats_menuPhoneCats={white_80}
 chats_menuTopBackgroundCats={black_10}
 chats_menuTopShadow={black}
 chats_menuTopShadowCats={black_10}
-chats_message_threeLines={rgba(130, 130, 130, 255)}
+chats_message_threeLines={gray}
 chats_message={white_60}
-chats_messageArchived={rgba(130, 130, 130, 255)}
+chats_messageArchived={gray}
 chats_muteIcon={black_30}
 chats_name={white_80}
 chats_nameArchived={white_80}
@@ -728,7 +729,7 @@ sharedMedia_linkPlaceholderText={white}
 sharedMedia_startStopLoadIcon={rgba(55, 169, 240)}
 statisticChartActivePickerChart={rgba(89, 104, 121, 216)}
 statisticChartBackZoomColor={rgba(70, 170, 238, 255)}
-statisticChartCheckboxInactive={rgba(155, 155, 155, 255)}
+statisticChartCheckboxInactive={white_60}
 statisticChartChevronColor={rgba(118, 124, 133, 255)}
 statisticChartHighlightColor={white.with_alpha(134)}
 statisticChartHintLine={white.with_alpha(26)}
@@ -751,11 +752,11 @@ switch2TrackChecked={rgba(162, 206, 248)}
 switchThumb={white_70}
 switchThumbChecked={white_90}
 switchTrack={black_40}
-switchTrackBlue={rgba(104, 104, 106, 255)}
+switchTrackBlue={black_40}
 switchTrackBlueChecked={rgba(119, 209, 255, 255)}
 switchTrackBlueSelector={rgba(185, 221, 250, 25)}
 switchTrackBlueSelectorChecked={rgba(140, 215, 255, 50)}
-switchTrackBlueThumb={rgba(30, 30, 32, 255)}
+switchTrackBlueThumb={black_10}
 switchTrackBlueThumbChecked={rgba(45, 130, 195, 255)}
 switchTrackChecked={white_80}
 undo_background={black_10}
@@ -766,7 +767,7 @@ windowBackgroundChecked={rgba(47, 118, 171, 255)}
 windowBackgroundCheckText={white}
 windowBackgroundGray={black}
 windowBackgroundGrayShadow={black}
-windowBackgroundUnchecked={rgba(30, 30, 32, 255)}
+windowBackgroundUnchecked={black_10}
 windowBackgroundWhite={black}
 windowBackgroundWhiteBlackText={white_80}
 windowBackgroundWhiteBlueHeader={white}
