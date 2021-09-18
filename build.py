@@ -1,6 +1,7 @@
 import sys
 import random
 import colorsys
+from uuid import uuid4
 from collections import Counter, defaultdict
 
 
@@ -74,6 +75,7 @@ class rgba:
         self.b = b
         self.a = a
         self.has_parent = has_parent
+        self.uuid = uuid4()
 
         rgba.never_used.add(self)
 
@@ -115,7 +117,7 @@ class rgba:
         rgba.colour_usage_counter.update((s.as_rgb_tuple(),))
         rgba.never_used.discard(s)
         if not s.has_parent:
-            rgba.colour_instances[s.as_rgb_tuple()].add(s)
+            rgba.colour_instances[s.as_rgb_tuple()].add(s.uuid)
         int_val = int(s.as_argbhex(), 16)
         return f'{to_signed_32bit(int_val)}'
 
@@ -136,7 +138,7 @@ class rgba:
             if len(ids) <= 1:
                 continue
             num_warnings += 1
-            print(f'Warning: {repr(colour)} is defined by {len(ids)} instances! {ids}')
+            print(f'Warning: {repr(colour)} is defined by {len(ids)} instances!')
 
         print(f'{num_warnings} warning(s)')
 
