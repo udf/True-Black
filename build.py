@@ -1,3 +1,4 @@
+import sys
 import random
 import colorsys
 from collections import Counter, defaultdict
@@ -32,10 +33,19 @@ def sorted_items(dict, key=None, reverse=False):
         yield k, dict[k]
 
 
+def get_debug_colour():
+    h = random.uniform(0, 1)
+    s = random.uniform(0.3, 1)
+    v = random.uniform(0.3, 1)
+    r, g, b = [round(i * 255) for i in colorsys.hsv_to_rgb(h, s, v)]
+    return ''.join(f'{c:02X}' for c in (255, r, g, b))
+
+
 class rgba:
     colour_usage_counter = Counter()
     colour_instances = defaultdict(set)
     never_used = set()
+    gen_debug = False
 
     def __init__(self, r, g=None, b=None, a=None):
         # convert hex to tuple
@@ -92,6 +102,8 @@ class rgba:
         return f'rgba({s.r}, {s.g}, {s.b}, {s.a})'
 
     def __str__(s):
+        if rgba.gen_debug:
+            return str(to_signed_32bit(int(get_debug_colour(), 16)))
         rgba.colour_usage_counter.update((s,))
         rgba.colour_instances[s].add(id(s))
         rgba.never_used.discard(s)
@@ -146,6 +158,9 @@ placeholder_red = rgba(255, 0, 0)
 placeholder_green = rgba(0, 255, 0)
 placeholder_cyan = rgba(0, 255, 255)
 placeholder_yellow = rgba(255, 255, 0)
+
+if len(sys.argv) >= 2 and sys.argv[1] == '-d':
+    rgba.gen_debug = True
 
 data = f'''
 actionBarActionModeDefault={black}
@@ -775,7 +790,12 @@ windowBackgroundWhiteRedText6={rgba(255, 100, 100)}
 windowBackgroundWhiteValueText={rgba(81, 154, 186)}
 '''.strip()
 
-with open('true_black.attheme', 'w') as f:
+filename = 'true_black'
+if rgba.gen_debug:
+    filename += '_dbg'
+
+with open(f'{filename}.attheme', 'w') as f:
     f.write(data)
 
-rgba.print_warnings()
+if not rgba.gen_debug:
+    rgba.print_warnings()
