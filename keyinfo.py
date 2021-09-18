@@ -23,10 +23,10 @@ def get_keys(path):
 
 def get_debug_colour():
     h = random.uniform(0, 1)
-    s = random.uniform(0.5, 1)
-    v = random.uniform(0.5, 1)
-    rgb = colorsys.hsv_to_rgb(h, s, v)
-    return ''.join(f'{round(c * 255):02x}' for c in rgb)
+    s = random.uniform(0.3, 1)
+    v = random.uniform(0.3, 1)
+    rgb = [round(i * 255) for i in colorsys.hsv_to_rgb(h, s, v)]
+    return f'{{rgba({rgb[0]}, {rgb[1]}, {rgb[2]})}}'
 
 
 try:
@@ -38,11 +38,11 @@ try:
 
     print(f'Removed keys:')
     for k in removed_keys:
-        print(f'{k}=#{get_debug_colour()}')
+        print(f'{k}={get_debug_colour()}')
     print()
     print(f'New keys:')
     for k in new_keys:
-        print(f'{k}=#{get_debug_colour()}')
+        print(f'{k}={get_debug_colour()}')
     print()
 except RuntimeError as e:
     print('Error:', e)
