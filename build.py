@@ -47,6 +47,7 @@ class rgba:
     colour_instances = defaultdict(set)
     never_used = set()
     gen_debug = False
+    usage_counter = 0
 
     def __init__(self, r, g=None, b=None, a=None, has_parent=False):
         # convert hex to tuple
@@ -112,6 +113,10 @@ class rgba:
         return f'rgba({s.r}, {s.g}, {s.b}, {s.a})'
 
     def __str__(s):
+        rgba.usage_counter += 1
+        # change range to selectively turn colours red for debugging
+        if rgba.usage_counter in range(0, 0):
+            return str(to_signed_32bit(0xFFFF0000))
         if rgba.gen_debug:
             return str(to_signed_32bit(int(get_debug_colour(), 16)))
         rgba.colour_usage_counter.update((s.as_rgb_tuple(),))
@@ -813,3 +818,5 @@ with open(f'{filename}.attheme', 'w') as f:
 
 if not rgba.gen_debug:
     rgba.print_warnings()
+
+print(rgba.usage_counter, 'colours')
